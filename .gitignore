@@ -1,0 +1,24 @@
+# IntelliJ IDEA internals
+.idea/
+*.iml
+*.iws
+
+# Eclipse internals (since you're moving away from it)
+.metadata/
+.classpath
+.project
+.settings/
+
+# Compiled output folders
+bin/
+out/
+target/
+
+# Log files
+*.log
+
+# macOS system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
