@@ -1,123 +1,98 @@
 # TCSS 371 – Machine Organization
-## Assignment 1: Data Representation
+## Assignment 5: LC3 Simulator
 
 ---
 
 ## Purpose
 
-This assignment tests understanding of **data representation concepts** from Chapter 2 of the textbook.
+This assignment tests understanding of **LC3 instructions** by building a simplified LC3 simulator capable of running a subset of LC3 instructions.
 
-**Student Learning Outcome:** Convert numbers between various bases and use two's complement.
-
----
-
-## Problems Overview
-
-### 1. Two's Complement Problems *(5 points)*
-
-**a.** What is the greatest magnitude **positive** number representable in **7-bit 2's complement**?
-- Binary: _______________
-- Decimal: _______________
-
-**b.** What is the greatest magnitude **negative** number representable in **7-bit 2's complement**?
-- Binary: _______________
-- Decimal: _______________
-
-**c.** The following are **5-bit 2's complement** numbers. Which operations generate **overflow**? Justify by translating operands and results to decimal.
-- I. `10111 + 00111`
-- II. `10101 – 00101`
-- III. `01010 + 00111`
-
-**d.** Convert the following decimal numbers to **hexadecimal 2's complement** representations (hint: convert to binary first):
-- I. `114`
-- II. `-71`
+**Student Learning Outcomes:**
+- Translate between assembly instructions and machine code
+- Explain the instruction execution cycle
 
 ---
 
-### 2. Unsigned Representation Problems *(2.5 points)*
+## Group Requirement
 
-Add the following unsigned binary numbers. Express the answer in binary and decimal.
+> ⚠️ This assignment **must** be submitted as a group project of **no less than three members**.
 
-- **a.** `00101 + 11011`
-- **b.** `01110 + 01101`
-
----
-
-### 3. Hexadecimal Conversions *(2.5 points)*
-
-For each hex number, provide the value as a **2's complement binary** number and as an **ASCII string**:
-
-| | `x354D5A22` | `x34253549` |
-|---|---|---|
-| 2's complement (binary) | | |
-| ASCII string | | |
+Be sure to fill in your group members' names in the provided table linked at the top of the Assignment 5 page.
 
 ---
 
-### 4. IEEE Floating Point *(2.5 points)*
+## Provided Starter Code
 
-**a.** Write the **decimal equivalent** of the following IEEE floating-point bit pattern:
-```
-1 1000 0001 0110 1000 0000 0000 0000 000
-```
+The starter code is provided as an **Eclipse archive file** and includes the following files:
 
-**b.** Write the **IEEE floating-point representation** of:
-```
-10.625
-```
+| File | Status | Description |
+|------|--------|-------------|
+| `BitString.java` | 🚫 Do NOT modify | Core bit manipulation class used throughout the simulation |
+| `Simulator.java` | 🚫 Do NOT modify | Contains a sample LC3 program (prints 9 down to 1, then halts) |
+| `Computer.java` | ✅ Implement & submit | Main simulator class — implement the required methods |
+| `ComputerTest.java` | ✅ Write tests & submit | Unit test class — write tests for your `Computer` implementations |
 
 ---
 
-### 5. Java Programming *(7.5 points)*
+## File Descriptions
 
-Implement two methods in `Convert.java`:
+### `BitString.java`
+The foundation of the simulation. A `BitString` object contains:
+- A `char[]` array where each element is `'0'` or `'1'`
+- A `length` field tracking how full the array is (0–16)
 
-#### `convert2sCompToDecimal(char[] theBits)`
-Accepts an array of characters representing bits in a two's complement number and returns the decimal equivalent.
+Many manipulation methods are already provided — **no additional methods need to be written**. Familiarize yourself with the existing API before writing any code.
 
-- Max array length: **16 bits**
-- Throws `IllegalArgumentException` if length > 16
-- Parameter array must be **unchanged** after the call
+### `Simulator.java`
+Contains a short LC3 test program that:
+- Prints the numbers **9 down to 1**
+- Halts upon completion
 
-#### `convertDecimalTo2sComp(int theDecimal)`
-Accepts a decimal integer and returns a `char[]` representing its **16-bit two's complement** equivalent.
+A second test program is also included (currently commented out).
 
-- Throws `IllegalArgumentException` if the value cannot be represented in 16 bits
+### `Computer.java`
+Uses `BitString` objects to represent:
+- **Registers** — stored as an array of `BitString` objects
+- **Memory locations** — stored as an array of `BitString` objects
 
-#### Rules & Restrictions
-- ❌ Do **NOT** use Java built-in methods that perform the conversion for you
-- ❌ Do **NOT** use data structures or `String`/`StringBuilder` as intermediate representations
-- ✅ You **may** create private helper methods to reduce redundancy
-- ✅ Public method signatures **must not** be changed
-- ✅ Add **Javadoc comments** and an `@author` tag for each group member
-- ✅ All provided unit tests in `ConvertTest.java` must pass
+To implement each LC3 instruction, you will:
+1. Use `BitString` objects to represent registers and intermediate values
+2. Use `BitString` class methods to process each step of the instruction
+
+> 💡 **Tip:** Frequently display the `Computer` object during development to verify each instruction behaves correctly. **Remove or comment out all debug display lines before submitting.**
+
+### `ComputerTest.java`
+Contains unit tests for the methods you implement in `Computer.java`. Already includes:
+- 1 unit test for the `NOT` instruction
+- 3 unit tests for the `ADD` instruction
+
+Use these as **templates** when writing tests for the remaining instructions.
+
+---
+
+## Implementation Guidelines
+
+- Become familiar with all existing code **before** writing any new code
+- Each LC3 instruction implementation should follow the step-by-step execution cycle
+- Use `BitString` methods wherever possible — they are designed to support your implementation
+- Write unit tests in `ComputerTest.java` for every method you implement in `Computer.java`
+- Clean up all temporary debug/display code before final submission
 
 ---
 
 ## Files to Submit
 
-| File | Description |
-|------|-------------|
-| `Assignment1.pdf` / `.doc` / `.docx` | Written answers (must be legible, work shown) |
-| `Convert.java` | Completed Java implementation |
+| File | Notes |
+|------|-------|
+| `Computer.java` | Required methods implemented, debug output removed |
+| `ComputerTest.java` | Unit tests written for all implemented methods |
 
-> **Note:** Only one group member needs to submit. Ensure submission is before the due date.
+> Only one group member needs to submit. Ensure submission is made before the due date.
 
 ---
 
-## Grading Rubric
+## Grading
 
-| Section | Points |
-|---|---|
-| Two's Complement Problems | 5.0 |
-| Unsigned Representation Problems | 2.5 |
-| Hexadecimal / ASCII | 2.5 |
-| IEEE Floating Point Conversions | 2.5 |
-| Java Programming | 7.5 |
-| **Total** | **20.0** |
+**Total: 20 Points**
 
-### Java Programming Breakdown
-- 3.5 pts per method (correctness + all unit tests pass)
-- 0.5 pts for code documentation/comments
-- Use of data structures or Strings → point deduction
-- Use of built-in conversion methods → at least **-3.75 pts up to no credit**
+Grading will be based on correctness of the LC3 instruction implementations and the quality/coverage of your unit tests.
